@@ -138,7 +138,7 @@ def _plot_functional_group_distance(progress, output_directory):
         tritopic=tritopic,
         ditopic=ditopic,
         path=join(output_directory, 'functional_group_distance.png'),
-        y_label='Func. Grp. Distance / A',
+        y_label='Func. Grp. Dist. / A',
     )
 
 
