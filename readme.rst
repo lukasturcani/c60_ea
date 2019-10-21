@@ -11,7 +11,7 @@ The basic idea is that every stage or sub-stage is executed in a
 Docker container for maximum reproducibility. As such, each stage
 or sub-stage will contain a ``create_image`` folder which holds all
 the data necessary to create the image for that stage. The image
-can be create by simply running the ``create_image/create_image.bash``
+can be created by simply running the ``create_image/create_image.bash``
 script. If you run these bash scripts in the correct order, you will
 reproduce the entire project from scratch.
 
