@@ -8,10 +8,11 @@ def _get_generations(log):
     names = []
     for line in log:
         if line.isspace():
-            yield names
+            yield [name for fitness_value, name in sorted(names)]
             names = []
         else:
-            names.append(line.split()[0])
+            name, *_, fitness_value = line.split()
+            names.append((fitness_value, name))
 
 
 def get_progress(log_path, database_path):
