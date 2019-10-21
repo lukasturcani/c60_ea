@@ -74,10 +74,11 @@ def _plot_property(tritopic, ditopic, path, y_label):
     min_y = max(0, min(val for val in it.chain(tritopic, ditopic))-3)
     max_y = min(100, max(val for val in it.chain(tritopic, ditopic))+3)
     ax.set_ylim([min_y, max_y])
-    ax.set_ylabel(y_label)
+    ax.set_ylabel(y_label, fontsisze=label_size)
+    ax.set_xlabel('Generation', fontsize=label_size)
 
     fig.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.savefig(path, dpi=500)
+    plt.savefig(path, dpi=300)
     plt.close()
 
 
