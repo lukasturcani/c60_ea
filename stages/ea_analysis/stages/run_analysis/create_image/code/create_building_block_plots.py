@@ -4,6 +4,7 @@ import stk
 import numpy as np
 import rdkit.Chem.AllChem as rdkit
 import os
+from os.path import join
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import pickle
@@ -79,7 +80,7 @@ def _plot_property(tritopic, ditopic, path):
     plt.close()
 
 
-def _plot_rotatable_bonds(progress):
+def _plot_rotatable_bonds(progress, output_directory):
     tritopic = _get_property_progress(
         progress=progress,
         property_fn=_get_percent_rotatable_bonds,
@@ -91,10 +92,14 @@ def _plot_rotatable_bonds(progress):
         bb_filter=lambda bb: bb.count == 6,
     )
 
-    _plot_property(tritopic, ditopic)
+    _plot_property(
+        tritopic=tritopic,
+        ditopic=ditopic,
+        path=join(output_directory, 'rotatable_bonds.png'),
+    )
 
 
-def _plot_double_bonds(progress):
+def _plot_double_bonds(progress, output_directory):
     tritopic = _get_property_progress(
         progress=progress,
         property_fn=_get_percent_double_bonds,
@@ -106,10 +111,14 @@ def _plot_double_bonds(progress):
         bb_filter=lambda bb: bb.count == 6,
     )
 
-    _plot_property(tritopic, ditopic)
+    _plot_property(
+        tritopic=tritopic,
+        ditopic=ditopic,
+        path=join(output_directory, 'double_bonds'),
+    )
 
 
-def _plot_functional_group_distance(progress):
+def _plot_functional_group_distance(progress, output_directory):
     tritopic = _get_property_progress(
         progress=progress,
         property_fn=_get_functional_group_distance,
@@ -121,7 +130,11 @@ def _plot_functional_group_distance(progress):
         bb_filter=lambda bb: bb.count == 6,
     )
 
-    _plot_property(tritopic, ditopic)
+    _plot_property(
+        tritopic=tritopic,
+        ditopic=ditopic,
+        path=join(output_directory, 'functional_group_distance.png'),
+    )
 
 
 def main():
@@ -154,9 +167,9 @@ def main():
             rdkit.SanitizeMol(building_block)
             rdkit.Kekulize(building_block)
 
-    _plot_rotatable_bonds(progress)
-    _plot_double_bonds(progress)
-    _plot_functional_group_distance(progress)
+    _plot_rotatable_bonds(progress, args.output_directory)
+    _plot_double_bonds(progress, args.output_directory)
+    _plot_functional_group_distance(progress, args.output_directory)
 
 
 if __name__ == '__main__':
