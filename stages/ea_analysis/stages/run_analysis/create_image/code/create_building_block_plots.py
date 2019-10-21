@@ -25,10 +25,10 @@ def _get_percent_double_bonds(bb):
     return 100 * num_double_bonds / bb.mol.GetNumBonds()
 
 
-def _get_functional_group_distance(bb):
+def _get_functional_group_distance(bb_data):
     bb = stk.BuildingBlock.init_from_rdkit_mol(
-        mol=bb.mol,
-        functional_groups=[bb.functional_group],
+        mol=bb_data.mol,
+        functional_groups=[bb_data.functional_group],
     )
     return np.mean(list(bb.get_bonder_distances()))
 
