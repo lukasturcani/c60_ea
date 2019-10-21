@@ -42,7 +42,7 @@ def _get_property_progress(progress, property_fn, bb_filter):
     ]
 
 
-def _plot_property(tritopic, ditopic, path):
+def _plot_property(tritopic, ditopic, path, y_label):
     label_size = 24
     mpl.rcParams['xtick.labelsize'] = label_size
     mpl.rcParams['ytick.labelsize'] = label_size
@@ -74,7 +74,7 @@ def _plot_property(tritopic, ditopic, path):
     min_y = max(0, min(val for val in it.chain(tritopic, ditopic))-3)
     max_y = min(100, max(val for val in it.chain(tritopic, ditopic))+3)
     ax.set_ylim([min_y, max_y])
-    ax.set_ylabel(os.path.splitext(os.path.basename(path)))
+    ax.set_ylabel(y_label)
 
     fig.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.savefig(path, dpi=500)
@@ -97,6 +97,7 @@ def _plot_rotatable_bonds(progress, output_directory):
         tritopic=tritopic,
         ditopic=ditopic,
         path=join(output_directory, 'rotatable_bonds.png'),
+        y_label=r'% Rotatable Bonds',
     )
 
 
@@ -116,6 +117,7 @@ def _plot_double_bonds(progress, output_directory):
         tritopic=tritopic,
         ditopic=ditopic,
         path=join(output_directory, 'double_bonds'),
+        y_label=r'% Double Bonds',
     )
 
 
@@ -135,6 +137,7 @@ def _plot_functional_group_distance(progress, output_directory):
         tritopic=tritopic,
         ditopic=ditopic,
         path=join(output_directory, 'functional_group_distance.png'),
+        y_label='Functional Group Distance / A',
     )
 
 
