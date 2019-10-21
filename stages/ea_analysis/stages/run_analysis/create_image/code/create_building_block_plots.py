@@ -76,7 +76,7 @@ def _plot_property(tritopic, ditopic, path):
     ax.set_ylim([min_y, max_y])
 
     fig.tight_layout(rect=[0, 0.03, 1, 0.95])
-    plt.savefig(path, dpi=1000)
+    plt.savefig(path, dpi=500)
     plt.close()
 
 
