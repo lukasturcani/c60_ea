@@ -74,6 +74,7 @@ def _plot_property(tritopic, ditopic, path):
     min_y = max(0, min(val for val in it.chain(tritopic, ditopic))-3)
     max_y = min(100, max(val for val in it.chain(tritopic, ditopic))+3)
     ax.set_ylim([min_y, max_y])
+    ax.set_ylabel(os.path.splitext(os.path.basename(path)))
 
     fig.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.savefig(path, dpi=500)
