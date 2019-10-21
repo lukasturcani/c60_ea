@@ -164,8 +164,8 @@ def main():
 
     for generation in progress:
         for building_block in generation:
-            rdkit.SanitizeMol(building_block)
-            rdkit.Kekulize(building_block)
+            rdkit.SanitizeMol(building_block.mol)
+            rdkit.Kekulize(building_block.mol)
 
     _plot_rotatable_bonds(progress, args.output_directory)
     _plot_double_bonds(progress, args.output_directory)
