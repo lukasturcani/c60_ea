@@ -50,7 +50,7 @@ def _plot_property(tritopic, ditopic, path):
     mpl.rc('legend', fontsize=16)
 
     x = list(range(len(tritopic)))
-    ax[0].plot(
+    ax.plot(
         x,
         ditopic,
         linestyle='--',
@@ -60,7 +60,7 @@ def _plot_property(tritopic, ditopic, path):
         alpha=0.5,
         label='Di-topic',
     )
-    ax[0].plot(
+    ax.plot(
         x,
         tritopic,
         linestyle='--',
@@ -70,10 +70,10 @@ def _plot_property(tritopic, ditopic, path):
         alpha=0.5,
         label='Tri-topic',
     )
-    ax[0].legend()
+    ax.legend()
     min_y = max(0, min(val for val in it.chain(tritopic, ditopic))-3)
     max_y = min(100, max(val for val in it.chain(tritopic, ditopic))+3)
-    ax[0].set_ylim([min_y, max_y])
+    ax.set_ylim([min_y, max_y])
 
     fig.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.savefig(path, dpi=1000)
