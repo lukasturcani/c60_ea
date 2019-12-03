@@ -15,4 +15,8 @@ RUN source activate c60_ea; \
     python /ea_analysis/run_analysis/code/generational_fittest.py \
     "/ea_analysis/ea_progress/$N.pkl" \
     "/ea_analysis/run_analysis/output/$N/best_structures"; \
+    PYTHONPATH="/ea_analysis/run_analysis/code:/ea_analysis/code" \
+    python /ea_analysis/run_analysis/code/create_diversity_plot.py \
+    "/ea_analysis/ea_progress/$N.pkl" \
+    "/ea_analysis/run_analysis/output/$N/diversity_plot.png"; \
     done
