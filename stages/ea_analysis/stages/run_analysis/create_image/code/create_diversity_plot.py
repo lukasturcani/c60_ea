@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pickle
 import argparse
@@ -46,21 +47,30 @@ def main():
     parser.add_argument(
         'progress_pkl',
         help='The path to the pickled EA progress.',
+        nargs='+',
     )
     parser.add_argument(
         'output_file',
         help='The path to the plot.',
     )
     args = parser.parse_args()
-
-    with open(args.progress_pkl, 'rb') as f:
-        progress = pickle.load(f)
-
     fig, ax = plt.subplots()
-    ys = list(map(generation_similarity, progress))
-    xs = list(range(1, len(progress)+1))
-    ax.plot(xs, ys)
-    ax.set(xlabel='Generation', ylabel='Mean Dice Similarity')
+
+    for progress_pkl in args.progress_pkl:
+        run, _ = os.path.splitext(os.path.basename(progress_pkl))
+        with open(progress_pkl, 'rb') as f:
+            progress = pickle.load(f)
+
+        ys = list(map(generation_similarity, progress))
+        xs = list(range(1, len(progress)+1))
+        ax.plot(xs, ys, label=f'Run {run}')
+        ax.set(
+            xlabel='Generation',
+            ylabel='Mean Dice Similarity',
+        )
+
+    ax.legend()
+    fig.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.savefig(args.output_file, dpi=300)
     plt.close()
 
